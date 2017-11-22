@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundDarkGrey"
+    tools:context="com.example.tlin7877.assignment_1.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingLeft="@dimen/regular_padding"
+        android:paddingRight="@dimen/regular_padding">
+
+        <ImageView
+            android:id="@+id/fullscreen_content"
+            android:src="@drawable/image01"
+            android:layout_alignParentTop="true"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtMainPageWelcome"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/longtext_welcome"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/fullscreen_content" />
+        <Button
+            android:id="@+id/btnSignIn"
+            android:theme="@style/buttonStyle"
+            android:background="@color/transparent"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="@string/action_sign_in"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtMainPageWelcome"
+            app:layout_constraintRight_toLeftOf="@+id/btnJoinRewards"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintVertical_bias="0.839"
+            android:layout_marginRight="10dp"
+            app:layout_constraintRight_toRightOf="parent" />
+        <Button
+            android:id="@+id/btnJoinRewards"
+            android:theme="@style/buttonStyle"
+            android:background="@drawable/rounded_button"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:text="@string/action_join_rewards"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtMainPageWelcome"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintVertical_bias="0.839"
+            android:layout_marginRight="10dp"
+
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

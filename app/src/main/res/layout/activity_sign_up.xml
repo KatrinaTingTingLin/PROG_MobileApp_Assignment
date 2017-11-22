@@ -1,0 +1,275 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/form_background"
+    tools:context="com.example.tlin7877.assignment_1.SignUpActivity">
+
+    <!-- Sign up progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/frm_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Personal information section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_personal_infomartion"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtFirstName_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_first_name"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtLastName_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_last_name"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtAddress1_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_address"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="text"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtCity_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_city"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="text"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtState_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_state"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="text"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtZipCode_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_zip_code"
+                android:imeActionId="@+id/btnJoinRewards_sign_up"
+                android:inputType="textPostalAddress"
+                android:paddingTop="20dp"/>
+
+
+            <!-- Security section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_security"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtEmail_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:paddingTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtPassword_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:paddingTop="20dp"/>
+
+            <!-- Join Starbucks Rewards section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_join_starbucks_rewards"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/longtext_join_starbucks_rewards"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif"
+                android:paddingTop="10dp"/>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+                <RadioButton android:id="@+id/radio_digital_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_digital_card"
+                    android:textSize="15dp"
+                    android:fontFamily="sans-serif"
+                    android:onClick="onRadioButtonClicked"
+                    android:paddingTop="20dp"/>
+                <RadioButton android:id="@+id/radio_use_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_use_card"
+                    android:textSize="15dp"
+                    android:fontFamily="sans-serif"
+                    android:onClick="onRadioButtonClicked"
+                    android:paddingTop="10dp"/>
+                <RadioButton android:id="@+id/radio_not_join"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_not_join"
+                    android:textSize="15dp"
+                    android:fontFamily="sans-serif"
+                    android:onClick="onRadioButtonClicked"
+                    android:paddingTop="10dp"/>
+            </RadioGroup>
+
+            <!-- Birthday treat section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_birthday_treat"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/longtext_birthday_treat"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif"
+                android:paddingTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <Spinner
+                    android:id="@+id/spinner_month"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:id="@+id/spinner_day"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- Preferences and terms section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_preferences_terms"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="20dp"/>
+
+            <CheckBox
+                android:id="@+id/chbox_receive_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chbox_receive_email"
+                android:textSize="15dp"
+                android:hint="@string/longtext_receive_email"
+                android:paddingTop="20dp"/>
+
+            <CheckBox
+                android:id="@+id/chbox_use_fingerprint"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chbox_use_fingerprint"
+                android:textSize="15dp"
+                android:paddingTop="20dp"/>
+
+            <CheckBox
+                android:id="@+id/chbox_term_of_use"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chbox_term_of_use"
+                android:textSize="15dp"
+                android:paddingTop="20dp"/>
+
+            <Button
+                android:id="@+id/btnJoinRewards_sign_up"
+                android:theme="@style/buttonStyle"
+                android:background="@drawable/rounded_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right"
+                android:text="@string/action_join_rewards"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

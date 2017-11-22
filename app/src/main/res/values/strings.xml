@@ -1,0 +1,122 @@
+<resources>
+    <string name="app_name">Starbucks</string>
+
+    <!-- AppLoadActivity -->
+
+    <!-- MainActivity -->
+    <string name="longtext_welcome">Order ahead, pay with your phone, earn Stars and Rewards.</string>
+    <string name="action_join_rewards">Join Rewards</string>
+    <string name="action_sign_in">Sign in</string>
+
+    <!-- LoginActivity -->
+    <string name="title_activity_sign_in">Sign in to Rewards</string>
+    <string name="action_forgot_username">Forgot username?</string>
+    <string name="action_forgot_password">Forgot password?</string>
+
+    <!-- RegisterActivity -->
+    <string name="title_activity_sign_up">Starbucks Rewards</string>
+    <string name="label_personal_infomartion">Personal information</string>
+    <string name="prompt_first_name">Frist name *</string>
+    <string name="prompt_last_name">Last name *</string>
+    <string name="prompt_address">Address *</string>
+    <string name="prompt_city">City *</string>
+    <string name="prompt_state">State *</string>
+    <string name="prompt_zip_code">ZIP code *</string>
+    <string name="label_security">Security</string>
+    <string name="label_join_starbucks_rewards">Join Starbucks Rewards</string>
+    <string name="longtext_join_starbucks_rewards">With Starbucks Rewards,
+        your Starbucks Card lets you earn free drinks and food,
+        get free refills, pay with you phone, and more.</string>
+    <string name="radio_digital_card">Give me an instant digital card</string>
+    <string name="radio_use_card">Join using a Starbucks Card I already have</string>
+    <string name="radio_not_join">I don\'t want to join Starbucks Rewards</string>
+    <string name="label_birthday_treat">Want a free birthday treat?</string>
+    <string name="longtext_birthday_treat">
+        Add your birthdate so we can send you our best wishes (and a little something on us.)
+    </string>
+    <string-array name="spinner_month">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="spinner_day">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string name="label_preferences_terms">Preferences &amp; Terms</string>
+    <string name="chbox_receive_email">Yes, I\'d like email from Starbucks.</string>
+    <string name="longtext_receive_email">
+        The best way to earn Bonus Stars and hear about member-only offers is via email.
+    </string>
+    <string name="chbox_use_fingerprint">I\'d like to use Fingerprint</string>
+    <string name="longtext_use_fingerprint">
+        Use Fingerprint to sign in, authorize purchases, reloads, transfers, and more.
+    </string>
+    <string name="chbox_term_of_use">I accept the Terms of Use</string>
+    <string name="longtext_term_of_use">
+        By joining, I agree to Starbucks Rewards Terms and Starbucks Card Terms.
+    </string>
+    <string name="action_term_of_use">Terms of Use</string>
+
+
+    <!-- HomeActivity -->
+    <string name="title_home">Home</string>
+
+    <!-- PayActivity -->
+    <string name="title_pay">Pay</string>
+
+
+    <string name="prompt_email">Email *</string>
+    <string name="prompt_password">Password *</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
+</resources>
