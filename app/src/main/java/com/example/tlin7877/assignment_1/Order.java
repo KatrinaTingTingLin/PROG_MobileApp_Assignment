@@ -8,7 +8,7 @@ public class Order {
     private int OrderID;
     private String ReferenceNumber;
     private int DrinkID;
-    private int UserID;
+    private String UserEmail;
     private String Size;
     private String Comment;
     private String Date;
@@ -16,11 +16,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(String ReferenceNumber,int DrinkID,
-                 int UserID,String Size,String Comment,String Date) {
+    public Order(int OrderID,String ReferenceNumber,int DrinkID,
+                 String UserEmail,String Size,String Comment,String Date) {
+        this.OrderID = OrderID;
         this.ReferenceNumber=ReferenceNumber;
         this.DrinkID=DrinkID;
-        this.UserID=UserID;
+        this.UserEmail=UserEmail;
         this.Size=Size;
         this.Comment=Comment;
         this.Date=Date;
@@ -50,12 +51,12 @@ public class Order {
         DrinkID = drinkID;
     }
 
-    public int getUserID() {
-        return UserID;
+    public String getUserEmail() {
+        return UserEmail;
     }
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setUserEmail(String userEmail) {
+        UserEmail = userEmail;
     }
 
     public String getSize() {

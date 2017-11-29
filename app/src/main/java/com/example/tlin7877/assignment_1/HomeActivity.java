@@ -7,7 +7,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -16,6 +19,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
@@ -49,17 +53,11 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_pay) {
+        } else if (id == R.id.nav_cards) {
+
+        } else if (id == R.id.nav_order) {
 
         } else if (id == R.id.nav_history) {
-
-        } else if (id == R.id.nav_inbox) {
-
-        } else if (id == R.id.nav_stores) {
-
-        } else if (id == R.id.nav_gift) {
-
-        } else if (id == R.id.nav_music) {
 
         }
 

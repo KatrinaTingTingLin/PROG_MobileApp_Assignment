@@ -20,8 +20,8 @@
     <string name="prompt_last_name">Last name *</string>
     <string name="prompt_address">Address *</string>
     <string name="prompt_city">City *</string>
-    <string name="prompt_state">State *</string>
-    <string name="prompt_zip_code">ZIP code *</string>
+    <string name="prompt_province">Province *</string>
+    <string name="prompt_postal_code">Postal code *</string>
     <string name="label_security">Security</string>
     <string name="label_join_starbucks_rewards">Join Starbucks Rewards</string>
     <string name="longtext_join_starbucks_rewards">With Starbucks Rewards,
@@ -116,7 +116,6 @@
     </string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
 
 </resources>

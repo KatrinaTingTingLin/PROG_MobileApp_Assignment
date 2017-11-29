@@ -13,7 +13,8 @@ public class Drink {
     public Drink() {
     }
 
-    public Drink(String Name,float Price,String Description) {
+    public Drink(int DrinkID,String Name,float Price,String Description) {
+        this.DrinkID =DrinkID;
         this.Name=Name;
         this.Price=Price;
         this.Description=Description;

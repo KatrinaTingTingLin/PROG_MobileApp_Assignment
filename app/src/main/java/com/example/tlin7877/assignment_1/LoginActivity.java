@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
 
-
+    private DBHandler db;
     // UI references.
     private EditText mEmail;
     private EditText mPassword;
@@ -43,10 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        final DBHandler db = new DBHandler(this);
-        // Inserting User
-        db.addUser(new User("Ting Ting", "Lin", "Fake Adress","Kitchener","Ontario",
-                "N1N2N3","test@gmail.com","password","19920101",1));
+        db = new DBHandler(this);
+
 
         // Set up the login form.
         mEmail = (EditText) findViewById(R.id.txtEmail_sign_in);
@@ -56,9 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                String hardCodedEmail = "email@email.com";
-                String hardCodedPwd = "password";
-                if (mEmail.getText().toString().equals(hardCodedEmail) && mPassword.getText().toString().equals(hardCodedPwd)){
+                User user = db.getUser(mEmail.getText().toString());
+                if (mPassword.getText().toString().equals(user.getPassword())){
                     Toast.makeText(LoginActivity.this,"Hello", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);

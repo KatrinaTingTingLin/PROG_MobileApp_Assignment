@@ -5,15 +5,14 @@ package com.example.tlin7877.assignment_1;
  */
 
 public class User {
-    private int UserID;
+    private String Email;
+    private String Password;
     private String FirstName;
     private String LastName;
     private String Address;
     private String City;
     private String Province;
     private String PostalCode;
-    private String Email;
-    private String Password;
     private String Birthday;
     private int ReceiveEmail;
 
@@ -21,27 +20,36 @@ public class User {
     {
 
     }
-    public User(String FirstName,String LastName,
+    public User(String Email, String Password,String FirstName,String LastName,
                 String Address, String City,String Province,
-                String PostalCode,String Email,String Password,
-                String Birthday,int ReceiveEmail)
+                String PostalCode, String Birthday,int ReceiveEmail)
     {
+        this.Email = Email;
+        this.Password=Password;
         this.FirstName=FirstName;
         this.LastName=LastName;
         this.Address=Address;
         this.City=City;
         this.Province=Province;
         this.PostalCode=PostalCode;
-        this.Email=Email;
-        this.Password=Password;
         this.Birthday=Birthday;
         this.ReceiveEmail=ReceiveEmail;
     }
 
-    public int getUserID() {return UserID;}
+    public String getEmail() {
+        return Email;
+    }
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public String getFirstName() {
@@ -87,22 +95,6 @@ public class User {
     public String getPostalCode() { return PostalCode;}
 
     public void setPostalCode(String postalCode) { PostalCode = postalCode;}
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
 
     public String getBirthday() {
         return Birthday;

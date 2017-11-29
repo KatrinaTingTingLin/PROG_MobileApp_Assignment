@@ -45,6 +45,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class SignUpActivity extends AppCompatActivity{
 
+    private DBHandler db;
     // UI references.
     private EditText txtFirstName;
     private EditText txtLastName;
@@ -59,9 +60,13 @@ public class SignUpActivity extends AppCompatActivity{
     private RadioButton radioUseCard;
     private RadioButton radioNotJoin;
 
+    private Spinner spinnerMonth;
+    private Spinner spinnerDay;
+
     private CheckBox chboxReceiveEmail;
     private CheckBox chboxUseFingerPrint;
     private CheckBox chboxTermOfUse;
+
 
     private View mProgressView;
     private View mSignUpFormView;
@@ -72,8 +77,7 @@ public class SignUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        final DBHandler db = new DBHandler(this);
-
+        db = new DBHandler(this);
 
         // Set up the login form.
         txtFirstName = (EditText) findViewById(R.id.txtFirstName_sign_up);
@@ -94,63 +98,19 @@ public class SignUpActivity extends AppCompatActivity{
         chboxTermOfUse = (CheckBox) findViewById(R.id.chbox_term_of_use);
 
 
-        final Spinner spinnerMonth = (Spinner) findViewById(R.id.spinner_month);
+       spinnerMonth = (Spinner) findViewById(R.id.spinner_month);
         ArrayAdapter<CharSequence> adapterMonth = ArrayAdapter.createFromResource(this,
                 R.array.spinner_month, android.R.layout.simple_spinner_item);
         adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(adapterMonth);
 
-        final Spinner spinnerDay = (Spinner) findViewById(R.id.spinner_day);
+        spinnerDay = (Spinner) findViewById(R.id.spinner_day);
         ArrayAdapter<CharSequence> adapterDay = ArrayAdapter.createFromResource(this,
                 R.array.spinner_day, android.R.layout.simple_spinner_item);
         adapterDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDay.setAdapter(adapterDay);
 
         Button mJoinRewardsButton = (Button) findViewById(R.id.btnJoinRewards_sign_up);
-        mJoinRewardsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (txtFirstName.getText().toString() != "" &&
-                        txtLastName.getText().toString() != "" &&
-                        txtAddress.getText().toString() != "" &&
-                        txtCity.getText().toString() != "" &&
-                        txtState.getText().toString() != "" &&
-                        txtZipCode.getText().toString() != "" &&
-                        txtEmail.getText().toString() != "" &&
-                        txtPassword.getText().toString() != "" &&
-                        (radioDigitalCard.isChecked() ||
-                                radioUseCard.isChecked() ||
-                                radioNotJoin.isChecked()) &&
-                        chboxTermOfUse.isChecked()
-                        ){
-                    String dob =  spinnerMonth.getSelectedItem().toString()
-                            + spinnerDay.getSelectedItem().toString();
-                    int receiveEmail = 1;
-                    if (!chboxReceiveEmail.isChecked()){
-                        receiveEmail = 0;
-                    }
-
-                    // Inserting User
-                    db.addUser(new User(txtFirstName.getText().toString(),
-                            txtLastName.getText().toString(),
-                            txtAddress.getText().toString(),
-                            txtCity.getText().toString(),
-                            txtState.getText().toString(),
-                            txtZipCode.getText().toString(),
-                            txtEmail.getText().toString(),
-                            txtPassword.getText().toString(),
-                            dob,receiveEmail));
-                    Toast.makeText(SignUpActivity.this,"Please sign in", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(SignUpActivity.this,
-                            "Please fill in all the required fields with *.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     // Handles radio button check
@@ -169,6 +129,48 @@ public class SignUpActivity extends AppCompatActivity{
             case R.id.radio_not_join:
                 if (checked)
                     break;
+        }
+    }
+
+    public void addData(View view){
+        if (txtFirstName.getText().toString() != "" &&
+                txtLastName.getText().toString() != "" &&
+                txtAddress.getText().toString() != "" &&
+                txtCity.getText().toString() != "" &&
+                txtState.getText().toString() != "" &&
+                txtZipCode.getText().toString() != "" &&
+                txtEmail.getText().toString() != "" &&
+                txtPassword.getText().toString() != "" &&
+                (radioDigitalCard.isChecked() ||
+                        radioUseCard.isChecked() ||
+                        radioNotJoin.isChecked()) &&
+                chboxTermOfUse.isChecked()
+                ){
+            String dob =  spinnerMonth.getSelectedItem().toString()
+                    + spinnerDay.getSelectedItem().toString();
+            int receiveEmail = 1;
+            if (!chboxReceiveEmail.isChecked()){
+                receiveEmail = 0;
+            }
+
+            // Inserting User
+            db.addUser(new User(txtEmail.getText().toString(),
+                    txtPassword.getText().toString(),
+                    txtFirstName.getText().toString(),
+                    txtLastName.getText().toString(),
+                    txtAddress.getText().toString(),
+                    txtCity.getText().toString(),
+                    txtState.getText().toString(),
+                    txtZipCode.getText().toString(),
+                    dob,receiveEmail));
+            Toast.makeText(SignUpActivity.this,"Please sign in", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(SignUpActivity.this,
+                    "Please fill in all the required fields with *.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

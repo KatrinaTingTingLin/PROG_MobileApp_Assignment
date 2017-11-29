@@ -8,17 +8,18 @@ public class Card {
     private int CardNumber;
     private float Value;
     private String Picture;
-    private int UserID;
+    private String UserEmail;
 
     public Card(){
 
     }
 
-    public Card(float Value,String Picture, int UserID)
+    public Card(int CardNumber,float Value,String Picture, String UserEmail)
     {
+        this.CardNumber = CardNumber;
         this.Value=Value;
         this.Picture=Picture;
-        this.UserID=UserID;
+        this.UserEmail=UserEmail;
     }
 
     public int getCardNumber() {
@@ -45,9 +46,9 @@ public class Card {
         Picture = picture;
     }
 
-    public int getUserID() { return UserID;}
+    public String getUserEmail() { return UserEmail;}
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setUserEmail(String userEmail) {
+        UserEmail = userEmail;
     }
 }

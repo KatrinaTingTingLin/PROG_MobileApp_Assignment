@@ -84,7 +84,7 @@
                 android:id="@+id/txtState_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_state"
+                android:hint="@string/prompt_province"
                 android:imeActionId="@+id/btnJoinRewards_sign_up"
                 android:inputType="text"
                 android:paddingTop="20dp"/>
@@ -93,7 +93,7 @@
                 android:id="@+id/txtZipCode_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_zip_code"
+                android:hint="@string/prompt_postal_code"
                 android:imeActionId="@+id/btnJoinRewards_sign_up"
                 android:inputType="textPostalAddress"
                 android:paddingTop="20dp"/>
@@ -268,7 +268,8 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="addData"/>
 
         </LinearLayout>
     </ScrollView>

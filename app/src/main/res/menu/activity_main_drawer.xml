@@ -5,22 +5,14 @@
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_pay"
+            android:id="@+id/nav_cards"
             android:title="Cards" />
         <item
-            android:id="@+id/nav_history"
+            android:id="@+id/nav_order"
             android:title="Order" />
         <item
             android:id="@+id/nav_history"
             android:title="History" />
     </group>
-
-    <item android:title="Profile">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:title="Share" />
-        </menu>
-    </item>
 
 </menu>

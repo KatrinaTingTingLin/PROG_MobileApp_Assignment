@@ -24,22 +24,21 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_DRINK = "Drink";
     private static final String TABLE_ORDER = "Order";
     // User Table Columns names
-    private static final String USER_ID = "UserID";
+    private static final String USER_EMAIL = "Email";
+    private static final String USER_PASSWORD = "Password";
     private static final String USER_FIRST_NAME = "FirstName";
     private static final String USER_LAST_NAME = "LastName";
     private static final String USER_ADDR = "Address";
     private static final String USER_CITY = "City";
     private static final String USER_PROVINCE = "Province";
     private static final String USER_POSTALCODE = "PostalCode";
-    private static final String USER_EMAIL = "Email";
-    private static final String USER_PASSWORD = "Password";
     private static final String USER_BIRTHDAY = "Birthday";
     private static final String USER_RECEIVEEMAIL = "ReceiveEmail";
     // Card Table Columns names
     private static final String CARD_NUMBER = "CardNumber";
     private static final String CARD_VALUE = "Value";
     private static final String CARD_PICTURE = "Picture";
-    private static final String CARD_USER_ID = "UserID";
+    private static final String CARD_USER_EMAIL = "UserEmail";
     // Drink Table Columns names
     private static final String DRINK_ID = "DrinkID";
     private static final String DRINK_NAME = "Name";
@@ -49,7 +48,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ORDER_ID = "OrderID";
     private static final String ORDER_REF = "ReferenceNumber";
     private static final String ORDER_DRINK_ID = "DrinkID";
-    private static final String ORDER_USER_ID = "UserID";
+    private static final String ORDER_USER_EMAIL = "UserEmail";
     private static final String ORDER_SIZE = "Size";
     private static final String ORDER_COMMENT = "Comment";
     private static final String ORDER_Date = "Date";
@@ -63,15 +62,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Create table User
         String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + USER_EMAIL + " TEXT PRIMARY KEY,"
+                + USER_PASSWORD + " TEXT NOT NULL,"
                 + USER_FIRST_NAME + " TEXT NOT NULL,"
                 + USER_LAST_NAME + " TEXT NOT NULL,"
                 + USER_ADDR + " TEXT NOT NULL,"
                 + USER_CITY + " TEXT NOT NULL,"
                 + USER_PROVINCE + " TEXT NOT NULL,"
                 + USER_POSTALCODE + " TEXT NOT NULL,"
-                + USER_EMAIL + " TEXT NOT NULL,"
-                + USER_PASSWORD + " TEXT NOT NULL,"
                 + USER_BIRTHDAY + " TEXT NOT NULL,"
                 + USER_RECEIVEEMAIL + " INTEGER NOT NULL DEFAULT 1" + ");";
         //Boolean flag = (cursor.getInt(cursor.getColumnIndex("flag")) == 1);
@@ -81,30 +79,30 @@ public class DBHandler extends SQLiteOpenHelper {
                 + CARD_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CARD_VALUE + " REAL NOT NULL,"
                 + CARD_PICTURE + " TEXT NOT NULL,"
-                + CARD_USER_ID + " INTEGER NOT NULL,"
-                + " FOREIGN KEY (" +CARD_USER_ID +") REFERENCES "
-                + TABLE_USER + "(" + USER_ID + "));";
+                + CARD_USER_EMAIL + " TEXT NOT NULL,"
+                + " FOREIGN KEY (" +CARD_USER_EMAIL +") REFERENCES "
+                + TABLE_USER + "(" + USER_EMAIL + "));";
         db.execSQL(CREATE_CARD_TABLE);
-        // Create table User
+        // Create table Drink
         String CREATE_DRINK_TABLE = "CREATE TABLE " + TABLE_DRINK + "("
                 + DRINK_ID + " INTEGER PRIMARY KEY,"
                 + DRINK_NAME + " TEXT NOT NULL,"
                 + DRINK_PRICE + " REAL NOT NULL,"
                 + DRINK_DESCRIPTION + " TEXT NOT NULL"+ ");";
         db.execSQL(CREATE_DRINK_TABLE);
-        // Create table User
+        // Create table Order
         String CREATE_ORDER_TABLE = "CREATE TABLE " + TABLE_ORDER + "("
                 + ORDER_ID + " INTEGER PRIMARY KEY,"
                 + ORDER_REF + " TEXT NOT NULL,"
                 + ORDER_DRINK_ID + " INTEGER NOT NULL,"
-                + ORDER_USER_ID + " INTEGER NOT NULL,"
+                + ORDER_USER_EMAIL + " TEXT NOT NULL,"
                 + ORDER_SIZE + " TEXT NOT NULL,"
                 + ORDER_COMMENT + " TEXT,"
                 + ORDER_Date + " TEXT NOT NULL,"
-                + " FOREIGN KEY (" +ORDER_DRINK_ID +") REFERENCES "
-                + TABLE_DRINK + "(" + DRINK_ID + ")"
-                + " FOREIGN KEY (" +ORDER_USER_ID +") REFERENCES "
-                + TABLE_USER + "(" + USER_ID+ "));";
+                + " FOREIGN KEY (" + ORDER_DRINK_ID +") REFERENCES "
+                + TABLE_DRINK + "(" + DRINK_ID + "),"
+                + " FOREIGN KEY (" + ORDER_USER_EMAIL +") REFERENCES "
+                + TABLE_USER + "(" + USER_EMAIL + "));";
         db.execSQL(CREATE_ORDER_TABLE);
     }
 
@@ -125,14 +123,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(USER_EMAIL, user.getEmail());
+        values.put(USER_PASSWORD, user.getPassword());
         values.put(USER_FIRST_NAME, user.getFirstName());
         values.put(USER_LAST_NAME, user.getLastName());
         values.put(USER_ADDR, user.getAddress());
         values.put(USER_CITY, user.getCity());
         values.put(USER_PROVINCE, user.getProvince());
         values.put(USER_POSTALCODE, user.getPostalCode());
-        values.put(USER_EMAIL, user.getEmail());
-        values.put(USER_PASSWORD, user.getPassword());
         values.put(USER_BIRTHDAY, user.getBirthday());
         values.put(USER_RECEIVEEMAIL, user.getReceiveEmail());
         // Inserting Row
@@ -141,19 +139,20 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Read one User
-    public User getUser(int id) {
+    public User getUser(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USER, new String[] { USER_ID,
-                        USER_FIRST_NAME, USER_LAST_NAME, USER_ADDR,
-                        USER_CITY,USER_PROVINCE,USER_POSTALCODE,USER_EMAIL,
-                        USER_PASSWORD,USER_BIRTHDAY,USER_RECEIVEEMAIL}, USER_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_USER, new String[] { USER_EMAIL,
+                        USER_PASSWORD,USER_FIRST_NAME, USER_LAST_NAME, USER_ADDR,
+                        USER_CITY,USER_PROVINCE,USER_POSTALCODE,
+                        USER_BIRTHDAY,USER_RECEIVEEMAIL}, USER_EMAIL + "=?",
+                new String[] { email }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        User user = new User(cursor.getString(1), cursor.getString(2),cursor.getString(3),
+        User user = new User(cursor.getString(0),cursor.getString(1),
+                cursor.getString(2),cursor.getString(3),
                 cursor.getString(4),cursor.getString(5),cursor.getString(6),
-                cursor.getString(7),cursor.getString(8),cursor.getString(9),
-                Integer.parseInt(cursor.getString(10)));
+                cursor.getString(7),cursor.getString(8),
+                Integer.parseInt(cursor.getString(9)));
         // return User
         return user;
     }
@@ -169,17 +168,16 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
-                user.setUserID(Integer.parseInt(cursor.getString(0)));
-                user.setFirstName(cursor.getString(1));
-                user.setLastName(cursor.getString(2));
-                user.setAddress(cursor.getString(3));
-                user.setCity(cursor.getString(4));
-                user.setProvince(cursor.getString(5));
-                user.setPostalCode(cursor.getString(6));
-                user.setEmail(cursor.getString(7));
-                user.setPassword(cursor.getString(8));
-                user.setBirthday(cursor.getString(9));
-                user.setReceiveEmail(Integer.parseInt(cursor.getString(10)));
+                user.setEmail(cursor.getString(0));
+                user.setPassword(cursor.getString(1));
+                user.setFirstName(cursor.getString(2));
+                user.setLastName(cursor.getString(3));
+                user.setAddress(cursor.getString(4));
+                user.setCity(cursor.getString(5));
+                user.setProvince(cursor.getString(6));
+                user.setPostalCode(cursor.getString(7));
+                user.setBirthday(cursor.getString(8));
+                user.setReceiveEmail(Integer.parseInt(cursor.getString(9)));
                 // Adding user to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -202,26 +200,25 @@ public class DBHandler extends SQLiteOpenHelper {
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(USER_PASSWORD, user.getPassword());
         values.put(USER_FIRST_NAME, user.getFirstName());
         values.put(USER_LAST_NAME, user.getLastName());
         values.put(USER_ADDR, user.getAddress());
         values.put(USER_CITY, user.getCity());
         values.put(USER_PROVINCE, user.getProvince());
         values.put(USER_POSTALCODE, user.getPostalCode());
-        values.put(USER_EMAIL, user.getEmail());
-        values.put(USER_PASSWORD, user.getPassword());
         values.put(USER_BIRTHDAY, user.getBirthday());
         values.put(USER_RECEIVEEMAIL, user.getReceiveEmail());
         // updating row
-        return db.update(TABLE_USER, values, USER_ID + " = ?",
-                new String[]{String.valueOf(user.getUserID())});
+        return db.update(TABLE_USER, values, USER_EMAIL + " = ?",
+                new String[]{String.valueOf(user.getEmail())});
     }
 
     // Deleting a user
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_USER, USER_ID + " = ?",
-                new String[] { String.valueOf(user.getUserID()) });
+        db.delete(TABLE_USER, USER_EMAIL + " = ?",
+                new String[] { String.valueOf(user.getEmail()) });
         db.close();
     }
 
@@ -233,7 +230,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CARD_VALUE, card.getValue());
         values.put(CARD_PICTURE, card.getPicture());
-        values.put(CARD_USER_ID, card.getUserID());
+        values.put(CARD_USER_EMAIL, card.getUserEmail());
         // Inserting Row
         db.insert(TABLE_CARD, null, values);
         db.close(); // Closing database connection
@@ -243,12 +240,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public Card getCard(int number) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_CARD, new String[] { CARD_NUMBER,
-                        CARD_VALUE, CARD_PICTURE, CARD_USER_ID}, CARD_NUMBER + "=?",
+                        CARD_VALUE, CARD_PICTURE, CARD_USER_EMAIL}, CARD_NUMBER + "=?",
                 new String[] { String.valueOf(number) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        Card card = new Card(Float.parseFloat(cursor.getString(1)), cursor.getString(2),
-                Integer.parseInt(cursor.getString(3)));
+        Card card = new Card(Integer.parseInt(cursor.getString(0)),
+                Float.parseFloat(cursor.getString(1)), cursor.getString(2),
+                cursor.getString(3));
         // return Card
         return card;
     }
@@ -267,7 +265,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 card.setCardNumber(Integer.parseInt(cursor.getString(0)));
                 card.setValue(Float.parseFloat(cursor.getString(1)));
                 card.setPicture(cursor.getString(2));
-                card.setUserID(Integer.parseInt(cursor.getString(3)));
+                card.setUserEmail(cursor.getString(3));
                 // Adding card to list
                 cardList.add(card);
             } while (cursor.moveToNext());
@@ -292,7 +290,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CARD_VALUE, card.getValue());
         values.put(CARD_PICTURE, card.getPicture());
-        values.put(CARD_USER_ID, card.getUserID());
+        values.put(CARD_USER_EMAIL, card.getUserEmail());
 
         // updating row
         return db.update(TABLE_CARD, values, CARD_NUMBER + " = ?",
@@ -328,7 +326,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        Drink drink = new Drink(cursor.getString(1),
+        Drink drink = new Drink(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
                 Float.parseFloat(cursor.getString(2)),cursor.getString(3));
         // return Drink
         return drink;
@@ -395,7 +393,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(ORDER_REF, order.getReferenceNumber());
         values.put(ORDER_DRINK_ID, order.getDrinkID());
-        values.put(ORDER_USER_ID, order.getUserID());
+        values.put(ORDER_USER_EMAIL, order.getUserEmail());
         values.put(ORDER_SIZE, order.getSize());
         values.put(ORDER_COMMENT, order.getComment());
         values.put(ORDER_Date, order.getDate());
@@ -408,14 +406,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public Order getOrder(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_ORDER, new String[] { ORDER_ID,ORDER_REF,
-                        ORDER_DRINK_ID, ORDER_USER_ID, ORDER_SIZE,
+                        ORDER_DRINK_ID, ORDER_USER_EMAIL, ORDER_SIZE,
                         ORDER_COMMENT,ORDER_Date}, ORDER_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        Order order = new Order(cursor.getString(1),
+        Order order = new Order(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
                 Integer.parseInt(cursor.getString(2)),
-                Integer.parseInt(cursor.getString(3)),
+                cursor.getString(3),
                 cursor.getString(4), cursor.getString(5),cursor.getString(6));
         // return Order
         return order;
@@ -435,7 +433,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 order.setOrderID(Integer.parseInt(cursor.getString(0)));
                 order.setReferenceNumber(cursor.getString(1));
                 order.setDrinkID(Integer.parseInt(cursor.getString(2)));
-                order.setUserID(Integer.parseInt(cursor.getString(3)));
+                order.setUserEmail(cursor.getString(3));
                 order.setSize(cursor.getString(4));
                 order.setComment(cursor.getString(5));
                 order.setDate(cursor.getString(6));
@@ -463,7 +461,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(ORDER_REF, order.getReferenceNumber());
         values.put(ORDER_DRINK_ID, order.getDrinkID());
-        values.put(ORDER_USER_ID, order.getUserID());
+        values.put(ORDER_USER_EMAIL, order.getUserEmail());
         values.put(ORDER_SIZE, order.getSize());
         values.put(ORDER_COMMENT, order.getComment());
         values.put(ORDER_Date, order.getDate());
