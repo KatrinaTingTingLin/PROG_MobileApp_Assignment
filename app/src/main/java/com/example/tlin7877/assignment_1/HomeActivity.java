@@ -1,5 +1,6 @@
 package com.example.tlin7877.assignment_1;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private DBHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,10 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
+
+        db = new DBHandler(this);
+
+
     }
 
     @Override
@@ -52,11 +58,14 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
+            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_cards) {
-
+            Intent intent = new Intent(HomeActivity.this, CardActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_order) {
-
+            Intent intent = new Intent(HomeActivity.this, OrderActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_history) {
 
         }

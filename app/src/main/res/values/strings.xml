@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Starbucks</string>
+    <string name="app_name">NotStarbucks</string>
 
     <!-- AppLoadActivity -->
 
@@ -14,7 +14,7 @@
     <string name="action_forgot_password">Forgot password?</string>
 
     <!-- RegisterActivity -->
-    <string name="title_activity_sign_up">Starbucks Rewards</string>
+    <string name="title_activity_sign_up">NotStarbucks Rewards</string>
     <string name="label_personal_infomartion">Personal information</string>
     <string name="prompt_first_name">Frist name *</string>
     <string name="prompt_last_name">Last name *</string>
@@ -23,13 +23,13 @@
     <string name="prompt_province">Province *</string>
     <string name="prompt_postal_code">Postal code *</string>
     <string name="label_security">Security</string>
-    <string name="label_join_starbucks_rewards">Join Starbucks Rewards</string>
-    <string name="longtext_join_starbucks_rewards">With Starbucks Rewards,
-        your Starbucks Card lets you earn free drinks and food,
+    <string name="label_join_starbucks_rewards">Join NotStarbucks Rewards</string>
+    <string name="longtext_join_starbucks_rewards">With NotStarbucks Rewards,
+        your NotStarbucks Card lets you earn free drinks and food,
         get free refills, pay with you phone, and more.</string>
     <string name="radio_digital_card">Give me an instant digital card</string>
-    <string name="radio_use_card">Join using a Starbucks Card I already have</string>
-    <string name="radio_not_join">I don\'t want to join Starbucks Rewards</string>
+    <string name="radio_use_card">Join using a NotStarbucks Card I already have</string>
+    <string name="radio_not_join">I don\'t want to join NotStarbucks Rewards</string>
     <string name="label_birthday_treat">Want a free birthday treat?</string>
     <string name="longtext_birthday_treat">
         Add your birthdate so we can send you our best wishes (and a little something on us.)
@@ -82,7 +82,7 @@
         <item>31</item>
     </string-array>
     <string name="label_preferences_terms">Preferences &amp; Terms</string>
-    <string name="chbox_receive_email">Yes, I\'d like email from Starbucks.</string>
+    <string name="chbox_receive_email">Yes, I\'d like email from NotStarbucks.</string>
     <string name="longtext_receive_email">
         The best way to earn Bonus Stars and hear about member-only offers is via email.
     </string>
@@ -92,7 +92,7 @@
     </string>
     <string name="chbox_term_of_use">I accept the Terms of Use</string>
     <string name="longtext_term_of_use">
-        By joining, I agree to Starbucks Rewards Terms and Starbucks Card Terms.
+        By joining, I agree to NotStarbucks Rewards Terms and NotStarbucks Card Terms.
     </string>
     <string name="action_term_of_use">Terms of Use</string>
 
@@ -100,8 +100,11 @@
     <!-- HomeActivity -->
     <string name="title_home">Home</string>
 
-    <!-- PayActivity -->
-    <string name="title_pay">Pay</string>
+    <!-- CardActivity -->
+    <string name="title_card">Card</string>
+
+    <!-- OrderActivity -->
+    <string name="title_order">Order</string>
 
 
     <string name="prompt_email">Email *</string>

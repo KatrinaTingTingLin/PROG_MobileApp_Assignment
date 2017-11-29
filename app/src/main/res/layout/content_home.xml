@@ -20,19 +20,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <TableLayout
+        android:id="@+id/drinkTable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingLeft="@dimen/regular_padding"
-        android:paddingRight="@dimen/regular_padding">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="hello"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif-medium"
-            android:paddingTop="20dp"/>
-    </android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    </TableLayout>
 </android.support.design.widget.CoordinatorLayout>

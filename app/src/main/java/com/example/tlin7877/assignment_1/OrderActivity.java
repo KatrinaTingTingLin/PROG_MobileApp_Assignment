@@ -10,19 +10,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class CardActivity extends AppCompatActivity
+public class OrderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card);
+        setContentView(R.layout.activity_order);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_card);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_order);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -34,7 +34,7 @@ public class CardActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_card);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_order);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -50,19 +50,19 @@ public class CardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(CardActivity.this, HomeActivity.class);
+            Intent intent = new Intent(OrderActivity.this, HomeActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_cards) {
-            Intent intent = new Intent(CardActivity.this, CardActivity.class);
+            Intent intent = new Intent(OrderActivity.this, CardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+            Intent intent = new Intent(OrderActivity.this, OrderActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_history) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_card);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_order);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
