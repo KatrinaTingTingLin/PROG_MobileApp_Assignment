@@ -42,6 +42,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Drink Table Columns names
     private static final String DRINK_ID = "DrinkID";
     private static final String DRINK_NAME = "Name";
+    private static final String DRINK_PIC = "Picture";
     private static final String DRINK_PRICE = "Price";
     private static final String DRINK_DESCRIPTION = "Description";
     // Order Table Columns names
@@ -74,6 +75,20 @@ public class DBHandler extends SQLiteOpenHelper {
                 + USER_RECEIVEEMAIL + " INTEGER NOT NULL DEFAULT 1" + ");";
         //Boolean flag = (cursor.getInt(cursor.getColumnIndex("flag")) == 1);
         db.execSQL(CREATE_USER_TABLE);
+        // Add default user to user table
+        db.execSQL("INSERT INTO " + TABLE_USER + "("
+                + USER_EMAIL + ","
+                + USER_PASSWORD + ","
+                + USER_FIRST_NAME + ","
+                + USER_LAST_NAME + ","
+                + USER_ADDR + ","
+                + USER_CITY + ","
+                + USER_PROVINCE + ","
+                + USER_POSTALCODE + ","
+                + USER_BIRTHDAY + ","
+                + USER_RECEIVEEMAIL + ""
+                + ") VALUES('test@email.com','password','Ting','Lin','11 fake street'," +
+                "'Kitchener','Ontario','N1N2N3','May 1',0)");
         // Create table Card
         String CREATE_CARD_TABLE = "CREATE TABLE " + TABLE_CARD + "("
                 + CARD_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -87,9 +102,43 @@ public class DBHandler extends SQLiteOpenHelper {
         String CREATE_DRINK_TABLE = "CREATE TABLE " + TABLE_DRINK + "("
                 + DRINK_ID + " INTEGER PRIMARY KEY,"
                 + DRINK_NAME + " TEXT NOT NULL,"
+                + DRINK_PIC + " TEXT NOT NULL,"
                 + DRINK_PRICE + " REAL NOT NULL,"
                 + DRINK_DESCRIPTION + " TEXT NOT NULL"+ ");";
         db.execSQL(CREATE_DRINK_TABLE);
+        // Add default drinks to drink table
+        db.execSQL("INSERT INTO " + TABLE_DRINK + "("
+                + DRINK_NAME + ","
+                + DRINK_PIC + ","
+                + DRINK_PRICE + ","
+                + DRINK_DESCRIPTION + ") VALUES(" +
+                "'Salted Caramel Mocha Frappuccino'," +
+                "'salted_caramel_frap'," +
+                "'5.00'," +
+                "'We blend mocha sauce and toffee nut syrup with coffee, milk and ice, " +
+                "then finish it off with sweetened whipped cream, caramel sauce and a blend of " +
+                "turbinado sugar and sea salt for an explosion of flavor in every sip.')");
+        db.execSQL("INSERT INTO " + TABLE_DRINK + "("
+                + DRINK_NAME + ","
+                + DRINK_PIC + ","
+                + DRINK_PRICE + ","
+                + DRINK_DESCRIPTION + ") VALUES(" +
+                "'Nitro Teavana Peach Tea'," +
+                "'salted_caramel_frap'," +
+                "'5.00'," +
+                "'We blend mocha sauce and toffee nut syrup with coffee, milk and ice, " +
+                "then finish it off with sweetened whipped cream, caramel sauce and a blend of " +
+                "turbinado sugar and sea salt for an explosion of flavor in every sip.')");
+        db.execSQL("INSERT INTO " + TABLE_DRINK + "("
+                + DRINK_NAME + ","
+                + DRINK_PIC + ","
+                + DRINK_PRICE + ","
+                + DRINK_DESCRIPTION + ") VALUES(" +
+                "'Featured Dark Roast'," +
+                "'dark_roasted'," +
+                "'3.50'," +
+                "'This full-bodied dark roast coffee has the bold, robust flavors to showcase " +
+                "our roasting and blending artistry.')");
         // Create table Order
         String CREATE_ORDER_TABLE = "CREATE TABLE " + TABLE_ORDER + "("
                 + ORDER_ID + " INTEGER PRIMARY KEY,"
@@ -311,6 +360,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DRINK_NAME, drink.getName());
+        values.put(DRINK_PIC, drink.getPicture());
         values.put(DRINK_PRICE, drink.getPrice());
         values.put(DRINK_DESCRIPTION, drink.getDescription());
         // Inserting Row
@@ -322,12 +372,12 @@ public class DBHandler extends SQLiteOpenHelper {
     public Drink getDrink(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_DRINK, new String[] { DRINK_ID,
-                        DRINK_NAME, DRINK_PRICE, DRINK_DESCRIPTION}, DRINK_ID + "=?",
+                        DRINK_NAME, DRINK_PIC, DRINK_PRICE, DRINK_DESCRIPTION}, DRINK_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         Drink drink = new Drink(Integer.parseInt(cursor.getString(0)),cursor.getString(1),
-                Float.parseFloat(cursor.getString(2)),cursor.getString(3));
+                cursor.getString(2), Float.parseFloat(cursor.getString(3)),cursor.getString(4));
         // return Drink
         return drink;
     }
@@ -345,8 +395,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 Drink drink = new Drink();
                 drink.setDrinkID(Integer.parseInt(cursor.getString(0)));
                 drink.setName(cursor.getString(1));
-                drink.setPrice(Float.parseFloat(cursor.getString(2)));
-                drink.setDescription(cursor.getString(3));
+                drink.setPicture(cursor.getString(2));
+                drink.setPrice(Float.parseFloat(cursor.getString(3)));
+                drink.setDescription(cursor.getString(4));
                 // Adding drink to list
                 drinkList.add(drink);
             } while (cursor.moveToNext());
@@ -370,6 +421,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DRINK_NAME, drink.getName());
+        values.put(DRINK_PIC, drink.getPicture());
         values.put(DRINK_PRICE, drink.getPrice());
         values.put(DRINK_DESCRIPTION, drink.getDescription());
         // updating row

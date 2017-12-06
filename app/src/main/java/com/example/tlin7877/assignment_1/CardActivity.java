@@ -50,13 +50,16 @@ public class CardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(CardActivity.this, HomeActivity.class);
+            Intent intent = new Intent(CardActivity.this, HomeActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_cards) {
-            Intent intent = new Intent(CardActivity.this, CardActivity.class);
+            Intent intent = new Intent(CardActivity.this, CardActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+            Intent intent = new Intent(CardActivity.this, OrderActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_history) {
 

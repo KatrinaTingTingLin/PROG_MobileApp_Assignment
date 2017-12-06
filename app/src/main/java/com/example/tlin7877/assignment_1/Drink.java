@@ -7,15 +7,17 @@ package com.example.tlin7877.assignment_1;
 public class Drink {
     private int DrinkID;
     private String Name;
+    private String Picture;
     private float Price;
     private String Description;
 
     public Drink() {
     }
 
-    public Drink(int DrinkID,String Name,float Price,String Description) {
+    public Drink(int DrinkID,String Name,String Picture, float Price,String Description) {
         this.DrinkID =DrinkID;
         this.Name=Name;
+        this.Picture = Picture;
         this.Price=Price;
         this.Description=Description;
     }
@@ -28,13 +30,13 @@ public class Drink {
         DrinkID = drinkID;
     }
 
-    public String getName() {
-        return Name;
-    }
+    public String getName() { return Name; }
 
-    public void setName(String name) {
-        Name = name;
-    }
+    public void setName(String name) { Name = name; }
+
+    public String getPicture() { return Picture; }
+
+    public void setPicture(String picture) { Picture = picture;}
 
     public float getPrice() {
         return Price;
