@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:id="@+id/numberOfStar"
+        android:id="@+id/userEmail"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"

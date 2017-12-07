@@ -7,53 +7,28 @@
     android:background="@color/backgroundDarkGrey"
     tools:context="com.example.tlin7877.assignment_1.HomeActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_home"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <TableLayout
-        android:id="@+id/drinkTable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
+    <LinearLayout
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:stretchColumns="*">
-        <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/pic"
-                    android:src="@drawable/dark_roasted"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    />
-                <TextView
-                    android:id="@+id/txtMainPageWelcome"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_home"
-                    android:textSize="25dp"
-                    android:textColor="@color/white"
-                    android:fontFamily="sans-serif"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@+id/pic"/>
-            </RelativeLayout>
-        </TableRow>
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
 
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
 
-    </TableLayout>
+        <ListView
+            android:id="@+id/listView_Drink"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_background">
+
+        </ListView>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

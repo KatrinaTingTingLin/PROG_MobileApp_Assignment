@@ -12,7 +12,8 @@
     <color name="navigator_BottomBlack">#2D2926</color>
     <color name="form_background">#F7F7F7</color>
     <color name="transparent">#00FFFFFF</color>
-
+    <color name="light_grey">#faf9f7</color>
+    <color name="dark_grey">#ecebe7</color>
 
 
 </resources>

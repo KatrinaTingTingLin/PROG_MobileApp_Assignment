@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by tlin7877 on 11/22/2017.
@@ -22,7 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_USER = "User";
     private static final String TABLE_CARD = "Card";
     private static final String TABLE_DRINK = "Drink";
-    private static final String TABLE_ORDER = "Order";
+    private static final String TABLE_ORDER = "OrderT";
     // User Table Columns names
     private static final String USER_EMAIL = "Email";
     private static final String USER_PASSWORD = "Password";
@@ -72,7 +71,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + USER_PROVINCE + " TEXT NOT NULL,"
                 + USER_POSTALCODE + " TEXT NOT NULL,"
                 + USER_BIRTHDAY + " TEXT NOT NULL,"
-                + USER_RECEIVEEMAIL + " INTEGER NOT NULL DEFAULT 1" + ");";
+                + USER_RECEIVEEMAIL + " INTEGER NOT NULL DEFAULT 1" + ")";
         //Boolean flag = (cursor.getInt(cursor.getColumnIndex("flag")) == 1);
         db.execSQL(CREATE_USER_TABLE);
         // Add default user to user table
@@ -86,8 +85,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + USER_PROVINCE + ","
                 + USER_POSTALCODE + ","
                 + USER_BIRTHDAY + ","
-                + USER_RECEIVEEMAIL + ""
-                + ") VALUES('test@email.com','password','Ting','Lin','11 fake street'," +
+                + USER_RECEIVEEMAIL + ") VALUES(" +
+                "'test@email.com','password','Ting','Lin','11 fake street'," +
                 "'Kitchener','Ontario','N1N2N3','May 1',0)");
         // Create table Card
         String CREATE_CARD_TABLE = "CREATE TABLE " + TABLE_CARD + "("
@@ -96,7 +95,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + CARD_PICTURE + " TEXT NOT NULL,"
                 + CARD_USER_EMAIL + " TEXT NOT NULL,"
                 + " FOREIGN KEY (" +CARD_USER_EMAIL +") REFERENCES "
-                + TABLE_USER + "(" + USER_EMAIL + "));";
+                + TABLE_USER + "(" + USER_EMAIL + "))";
         db.execSQL(CREATE_CARD_TABLE);
         // Create table Drink
         String CREATE_DRINK_TABLE = "CREATE TABLE " + TABLE_DRINK + "("
@@ -104,7 +103,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + DRINK_NAME + " TEXT NOT NULL,"
                 + DRINK_PIC + " TEXT NOT NULL,"
                 + DRINK_PRICE + " REAL NOT NULL,"
-                + DRINK_DESCRIPTION + " TEXT NOT NULL"+ ");";
+                + DRINK_DESCRIPTION + " TEXT NOT NULL"+ ")";
         db.execSQL(CREATE_DRINK_TABLE);
         // Add default drinks to drink table
         db.execSQL("INSERT INTO " + TABLE_DRINK + "("
@@ -151,7 +150,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + " FOREIGN KEY (" + ORDER_DRINK_ID +") REFERENCES "
                 + TABLE_DRINK + "(" + DRINK_ID + "),"
                 + " FOREIGN KEY (" + ORDER_USER_EMAIL +") REFERENCES "
-                + TABLE_USER + "(" + USER_EMAIL + "));";
+                + TABLE_USER + "(" + USER_EMAIL + "))";
         db.execSQL(CREATE_ORDER_TABLE);
     }
 
@@ -207,11 +206,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Users
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<User>();
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> userList = new ArrayList<User>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_USER;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -301,11 +300,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Cards
-    public List<Card> getAllCards() {
-        List<Card> cardList = new ArrayList<Card>();
+    public ArrayList<Card> getAllCards() {
+        ArrayList<Card> cardList = new ArrayList<Card>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_CARD;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -383,11 +382,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Drinks
-    public List<Drink> getAllDrinks() {
-        List<Drink> drinkList = new ArrayList<Drink>();
+    public ArrayList<Drink> getAllDrinks() {
+        ArrayList<Drink> drinkList = new ArrayList<Drink>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_DRINK;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -472,11 +471,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Orders
-    public List<Order> getAllOrders() {
-        List<Order> orderList = new ArrayList<Order>();
+    public ArrayList<Order> getAllOrders() {
+        ArrayList<Order> orderList = new ArrayList<Order>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_ORDER;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

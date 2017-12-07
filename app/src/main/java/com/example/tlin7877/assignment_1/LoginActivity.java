@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User user = db.getUser(mEmail.getText().toString());
                 if (mPassword.getText().toString().equals(user.getPassword())){
+                    AccountPersister ap = new AccountPersister(user);
                     Toast.makeText(LoginActivity.this,"Hello", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
