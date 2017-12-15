@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="">
         <activity
-            android:name=".AppLoadActivity"
+            android:name=".activity.AppLoadActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/title_activity_sign_in"
             android:theme="@style/FullscreenLightTheme"
             android:windowSoftInputMode="stateHidden">
@@ -30,14 +30,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".activity.HomeActivity"
             android:label="@string/title_home"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activity.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/FullscreenLightTheme"
             android:windowSoftInputMode="stateHidden">
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CardActivity"
+            android:name=".activity.CardActivity"
             android:label="@string/title_card"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OrderActivity"
+            android:name=".activity.OrderActivity"
             android:label="@string/title_order"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -70,7 +70,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DrinkDetailActivity"
+            android:name=".activity.DrinkDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

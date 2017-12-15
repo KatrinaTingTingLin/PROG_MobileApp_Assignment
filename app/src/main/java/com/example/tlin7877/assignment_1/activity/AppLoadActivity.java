@@ -1,4 +1,4 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.util.Log;
+
+import com.example.tlin7877.assignment_1.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

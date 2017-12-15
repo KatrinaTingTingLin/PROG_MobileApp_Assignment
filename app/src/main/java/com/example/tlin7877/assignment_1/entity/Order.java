@@ -1,24 +1,47 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.entity;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by tlin7877 on 11/22/2017.
  */
 
+@Entity(tableName = "Order_T")
 public class Order {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "OrderID")
     private int OrderID;
+
+    @ColumnInfo(name = "ReferenceNumber")
     private String ReferenceNumber;
+
+    @ForeignKey(entity = Drink.class, parentColumns = "DrinkID", childColumns ="DrinkID" )
+    @ColumnInfo(name = "DrinkID")
     private int DrinkID;
+
+    @ForeignKey(entity = User.class, parentColumns = "Email", childColumns ="UserEmail" )
+    @ColumnInfo(name = "UserEmail")
     private String UserEmail;
+
+    @ColumnInfo(name = "Size")
     private String Size;
+
+    @ColumnInfo(name = "Comment")
     private String Comment;
+
+    @ColumnInfo(name = "Date")
     private String Date;
 
+    @Ignore
     public Order() {
     }
 
-    public Order(int OrderID,String ReferenceNumber,int DrinkID,
+    public Order(String ReferenceNumber,int DrinkID,
                  String UserEmail,String Size,String Comment,String Date) {
-        this.OrderID = OrderID;
         this.ReferenceNumber=ReferenceNumber;
         this.DrinkID=DrinkID;
         this.UserEmail=UserEmail;

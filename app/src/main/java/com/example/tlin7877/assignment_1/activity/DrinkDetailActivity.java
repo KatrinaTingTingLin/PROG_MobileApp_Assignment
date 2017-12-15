@@ -1,19 +1,21 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.tlin7877.assignment_1.R;
+import com.example.tlin7877.assignment_1.database.AppDatabase;
+import com.example.tlin7877.assignment_1.entity.Drink;
+
+import java.util.List;
 
 public class DrinkDetailActivity extends AppCompatActivity {
-    private DBHandler db;
+    private AppDatabase db;
     private int drinkID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +24,14 @@ public class DrinkDetailActivity extends AppCompatActivity {
 
         String drinkName = getIntent().getStringExtra("Drink_Name");
         int drinkPicID = getIntent().getIntExtra("Drink_Pic_ID",0);
-        db = new DBHandler(this);
-        ArrayList<Drink> drinks = db.getAllDrinks();
+        db = AppDatabase.getAppDatabase(this);
+        List<Drink> drinks = db.drinkDao().getAll();
         for (Drink tempDrink : drinks){
             if (tempDrink.getName().contains(drinkName)){
                 drinkID = tempDrink.getDrinkID();
             }
         }
-        Drink drink = db.getDrink(drinkID);
+        Drink drink = db.drinkDao().findByDrinkID(drinkID);
 
         ImageView ivDrink = (ImageView) findViewById(R.id.drinkPic);
         TextView tvDrinkName = (TextView) findViewById(R.id.drinkName);

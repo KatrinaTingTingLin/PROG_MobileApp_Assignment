@@ -1,21 +1,49 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.entity;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.ColumnInfo;
+import android.support.annotation.NonNull;
+
 
 /**
  * Created by tlin7877 on 11/22/2017.
  */
-
+@Entity(tableName = "User")
 public class User {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "Email")
     private String Email;
+
+    @ColumnInfo(name = "Password")
     private String Password;
+
+    @ColumnInfo(name = "FirstName")
     private String FirstName;
+
+    @ColumnInfo(name = "LastName")
     private String LastName;
+
+    @ColumnInfo(name = "Address")
     private String Address;
+
+    @ColumnInfo(name = "City")
     private String City;
+
+    @ColumnInfo(name = "Province")
     private String Province;
+
+    @ColumnInfo(name = "PostalCode")
     private String PostalCode;
+
+    @ColumnInfo(name = "Birthday")
     private String Birthday;
+
+    @ColumnInfo(name = "ReceiveEmail")
     private int ReceiveEmail;
 
+    @Ignore
     public User()
     {
 

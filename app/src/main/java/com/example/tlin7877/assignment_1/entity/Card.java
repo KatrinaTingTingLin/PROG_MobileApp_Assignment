@@ -1,22 +1,36 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.entity;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by tlin7877 on 11/22/2017.
  */
 
+@Entity(tableName = "Card")
 public class Card {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "CardNumber")
     private int CardNumber;
+
+    @ColumnInfo(name = "Value")
     private float Value;
+
+    @ColumnInfo(name = "Picture")
     private String Picture;
+
+    @ColumnInfo(name = "UserEmail")
     private String UserEmail;
 
+    @Ignore
     public Card(){
 
     }
 
-    public Card(int CardNumber,float Value,String Picture, String UserEmail)
+    public Card(float Value,String Picture, String UserEmail)
     {
-        this.CardNumber = CardNumber;
         this.Value=Value;
         this.Picture=Picture;
         this.UserEmail=UserEmail;

@@ -13,13 +13,12 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:id="@+id/userEmail"
+        android:id="@+id/txtUserEmail"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_alignParentLeft="true"
         android:layout_gravity="fill_vertical|center_horizontal"
-        android:text="__"
         android:textSize="30dp"
         android:fontFamily="sans-serif-light"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -28,7 +27,7 @@
         android:id="@+id/imageOfStar"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_toRightOf="@+id/numberOfStar"
+        android:layout_toRightOf="@+id/txtUserEmail"
         android:layout_gravity="center"
 
         app:srcCompat="@drawable/star_dark" />

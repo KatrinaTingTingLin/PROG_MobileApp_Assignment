@@ -1,4 +1,4 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -16,18 +16,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.tlin7877.assignment_1.DrinksAdapter;
+import com.example.tlin7877.assignment_1.EmailPersister;
+import com.example.tlin7877.assignment_1.R;
+import com.example.tlin7877.assignment_1.database.AppDatabase;
+import com.example.tlin7877.assignment_1.entity.User;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    private DBHandler db;
-    private AccountPersister ap;
     private DrinksAdapter adapter;
-    private ArrayList<Drink> drinkList;
     private ListView listView;
+
     String [] drinkName = {
             "Featured Dark Roast",
             "Nitro Teavana Peach Tea",
@@ -57,8 +58,11 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TextView tvUserEmail = (TextView) findViewById(R.id.userEmail);
+        TextView tvUserName = (TextView) findViewById(R.id.txtUserEmail);
 
+        EmailPersister ep = EmailPersister.getInstance();
+        String userEmail = ep.getEmail();
+        tvUserName.setText(userEmail);
 
         //Generate ListView from SQLite Database
         displayListView();
@@ -117,7 +121,11 @@ public class HomeActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_logout) {
-             ap = new AccountPersister();
+            EmailPersister ep = EmailPersister.getInstance();
+            ep.setInstance(new EmailPersister());
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);

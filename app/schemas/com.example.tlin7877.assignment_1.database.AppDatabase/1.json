@@ -1,0 +1,225 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "048137ca328e4dd452e84bf0e4df3a7c",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Email` TEXT NOT NULL, `Password` TEXT, `FirstName` TEXT, `LastName` TEXT, `Address` TEXT, `City` TEXT, `Province` TEXT, `PostalCode` TEXT, `Birthday` TEXT, `ReceiveEmail` INTEGER NOT NULL, PRIMARY KEY(`Email`))",
+        "fields": [
+          {
+            "fieldPath": "Email",
+            "columnName": "Email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Password",
+            "columnName": "Password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FirstName",
+            "columnName": "FirstName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastName",
+            "columnName": "LastName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Address",
+            "columnName": "Address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "City",
+            "columnName": "City",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Province",
+            "columnName": "Province",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PostalCode",
+            "columnName": "PostalCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Birthday",
+            "columnName": "Birthday",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ReceiveEmail",
+            "columnName": "ReceiveEmail",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Email"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Card",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`CardNumber` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Value` REAL NOT NULL, `Picture` TEXT, `UserEmail` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "CardNumber",
+            "columnName": "CardNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Value",
+            "columnName": "Value",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Picture",
+            "columnName": "Picture",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserEmail",
+            "columnName": "UserEmail",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "CardNumber"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Drink",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`DrinkID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Name` TEXT, `Picture` TEXT, `Price` REAL NOT NULL, `Description` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "DrinkID",
+            "columnName": "DrinkID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Name",
+            "columnName": "Name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Picture",
+            "columnName": "Picture",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Price",
+            "columnName": "Price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Description",
+            "columnName": "Description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "DrinkID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Order_T",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`OrderID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ReferenceNumber` TEXT, `DrinkID` INTEGER NOT NULL, `UserEmail` TEXT, `Size` TEXT, `Comment` TEXT, `Date` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "OrderID",
+            "columnName": "OrderID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ReferenceNumber",
+            "columnName": "ReferenceNumber",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DrinkID",
+            "columnName": "DrinkID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UserEmail",
+            "columnName": "UserEmail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Size",
+            "columnName": "Size",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Comment",
+            "columnName": "Comment",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Date",
+            "columnName": "Date",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "OrderID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"048137ca328e4dd452e84bf0e4df3a7c\")"
+    ]
+  }
+}

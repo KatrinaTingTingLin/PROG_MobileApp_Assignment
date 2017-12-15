@@ -1,51 +1,28 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import com.example.tlin7877.assignment_1.database.AppDatabase;
+import com.example.tlin7877.assignment_1.R;
+import com.example.tlin7877.assignment_1.entity.User;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class SignUpActivity extends AppCompatActivity{
 
-    private DBHandler db;
+    private AppDatabase db;
     // UI references.
     private EditText txtFirstName;
     private EditText txtLastName;
@@ -77,7 +54,6 @@ public class SignUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        db = new DBHandler(this);
 
         // Set up the login form.
         txtFirstName = (EditText) findViewById(R.id.txtFirstName_sign_up);
@@ -154,7 +130,8 @@ public class SignUpActivity extends AppCompatActivity{
             }
 
             // Inserting User
-            db.addUser(new User(txtEmail.getText().toString(),
+            db = AppDatabase.getAppDatabase(this);
+            db.userDao().insert(new User(txtEmail.getText().toString(),
                     txtPassword.getText().toString(),
                     txtFirstName.getText().toString(),
                     txtLastName.getText().toString(),
@@ -173,6 +150,5 @@ public class SignUpActivity extends AppCompatActivity{
                     Toast.LENGTH_SHORT).show();
         }
     }
-
 }
 
