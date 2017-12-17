@@ -103,11 +103,27 @@
     <!-- CardActivity -->
     <string name="title_card">Card</string>
 
+    <!-- DownloadActivity -->
+    <string name="title_download">Download Icon</string>
+
     <!-- OrderActivity -->
     <string name="title_order">Order</string>
 
     <!-- DrinkDetailActivity -->
     <string name="action_addToOrder">Add to order</string>
+
+    <!-- ProfileActivity -->
+    <string name="title_profile">Profile</string>
+    <string name="action_downloadImg">Download Image</string>
+    <string name="label_first_name">Frist name:</string>
+    <string name="label_last_name">Last name:</string>
+    <string name="label_address">Address:</string>
+    <string name="label_city">City:</string>
+    <string name="label_province">Province:</string>
+    <string name="label_postal_code">Postal code:</string>
+    <string name="label_birthday">Birthday:</string>
+    <string name="action_view_map">Open map</string>
+    <string name="action_view_website">Open starbucks website</string>
 
     <string name="prompt_email">Email *</string>
     <string name="prompt_password">Password *</string>

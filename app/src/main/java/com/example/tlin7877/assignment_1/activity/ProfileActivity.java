@@ -1,8 +1,9 @@
 package com.example.tlin7877.assignment_1.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,105 +11,93 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tlin7877.assignment_1.DrinksAdapter;
+import com.example.tlin7877.assignment_1.DownloadTask;
 import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
 import com.example.tlin7877.assignment_1.database.AppDatabase;
 import com.example.tlin7877.assignment_1.entity.User;
 
-public class HomeActivity extends AppCompatActivity
+public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private AppDatabase db;
     private EmailPersister ep;
-    private DrinksAdapter adapter;
-    private ListView listView;
+    ProgressDialog mProgressDialog;
 
-    String [] drinkName = {
-            "Featured Dark Roast",
-            "Nitro Teavana Peach Tea",
-            "Salted Caramel Mocha Frappuccino"
-    };
-    Integer[] imgid ={
-            R.drawable.dark_roasted,
-            R.drawable.nitro_peach_tea,
-            R.drawable.salted_caramel_frap
-    };
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_profile);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerLayout = navigationView.getHeaderView(0);
+        TextView tvFirstName = (TextView) findViewById(R.id.txt_first_name_profile);
+        TextView tvLastName = (TextView) findViewById(R.id.txt_last_name_profile);
+        TextView tvAddress = (TextView) findViewById(R.id.txt_address_profile);
+        TextView tvCity = (TextView) findViewById(R.id.txt_city_profile);
+        TextView tvProvince = (TextView) findViewById(R.id.txt_province_profile);
+        TextView tvPostalCode = (TextView) findViewById(R.id.txt_postal_code_profile);
+        TextView tvBirthday = (TextView) findViewById(R.id.txt_birthday_profile);
 
-        TextView tvUserName = (TextView) headerLayout.findViewById(R.id.txtUserEmail);
+        ep = new EmailPersister(this);
+        db = AppDatabase.getAppDatabase(this);
+        User user = db.userDao().findByEmail(ep.getUserEmail());
+        tvFirstName.setText(user.getFirstName());
+        tvLastName.setText(user.getLastName());
+        tvAddress.setText(user.getAddress());
+        tvCity.setText(user.getCity());
+        tvProvince.setText(user.getProvince());
+        tvPostalCode.setText(user.getPostalCode());
+        tvBirthday.setText(user.getBirthday());
 
-        ep = new EmailPersister(HomeActivity.this);
-        String userEmail = ep.getUserEmail();
-        tvUserName.setText(userEmail);
-
-        tvUserName.setOnClickListener(new View.OnClickListener() {
+        Button btnViewMap = (Button) findViewById(R.id.btnViewMap);
+        btnViewMap.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class).addFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+            public void onClick(View view) {
+                Uri location = Uri.parse("geo:0,0?q=299+Doon+Valley+Dr,+Kitchener,+ON");
+                // Or map point based on latitude/longitude
+                // Uri location = Uri.parse("geo:37.422219,-122.08364?z=14");
+                // z param is zoom level
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
             }
         });
 
-        //Generate ListView from SQLite Database
-        displayListView();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String selectedItem= drinkName[+position];
-                int picutreID = imgid[+position];
-                Intent intent = new Intent(HomeActivity.this, DrinkDetailActivity.class).addFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("Drink_Name",selectedItem);
-                intent.putExtra("Drink_Pic_ID",picutreID);
-                startActivity(intent);
+        Button btnViewWeb = (Button) findViewById(R.id.btnViewWeb);
+        btnViewWeb.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Uri webpage = Uri.parse("https://www.starbucks.ca/");
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(webIntent);
             }
         });
-    }
-
-    private void displayListView() {
-        adapter = new DrinksAdapter(this, drinkName,imgid);
-
-        listView = (ListView) findViewById(R.id.listView_Drink);
-        listView.setAdapter(adapter);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_profile);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

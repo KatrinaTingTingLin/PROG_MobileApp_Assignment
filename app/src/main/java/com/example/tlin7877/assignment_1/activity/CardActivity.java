@@ -10,10 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
+import com.example.tlin7877.assignment_1.database.AppDatabase;
 
 public class CardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+
+    private AppDatabase db;
+    private EmailPersister ep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,9 @@ public class CardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ep = new EmailPersister(this);
+        db = AppDatabase.getAppDatabase(this);
     }
 
     @Override
@@ -52,19 +60,28 @@ public class CardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(CardActivity.this, HomeActivity.class).addFlags(
+            Intent intent = new Intent(this, HomeActivity.class).addFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_cards) {
-            Intent intent = new Intent(CardActivity.this, CardActivity.class).addFlags(
+            Intent intent = new Intent(this, CardActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+        } else if (id == R.id.nav_download) {
+            Intent intent = new Intent(this, DownloadActivity.class).addFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(CardActivity.this, OrderActivity.class).addFlags(
+            Intent intent = new Intent(this, OrderActivity.class).addFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         } else if (id == R.id.nav_history) {
 
+        } else if (id == R.id.nav_logout) {
+            ep.logOutUser();
+            Intent intent = new Intent(this, MainActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_card);

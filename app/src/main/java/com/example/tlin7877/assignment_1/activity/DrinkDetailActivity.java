@@ -8,14 +8,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
 import com.example.tlin7877.assignment_1.database.AppDatabase;
 import com.example.tlin7877.assignment_1.entity.Drink;
+import com.example.tlin7877.assignment_1.entity.Order;
 
 import java.util.List;
 
 public class DrinkDetailActivity extends AppCompatActivity {
     private AppDatabase db;
+    private EmailPersister ep;
     private int drinkID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,10 @@ public class DrinkDetailActivity extends AppCompatActivity {
 
         String drinkName = getIntent().getStringExtra("Drink_Name");
         int drinkPicID = getIntent().getIntExtra("Drink_Pic_ID",0);
+
+        ep = new EmailPersister(this);
         db = AppDatabase.getAppDatabase(this);
+
         List<Drink> drinks = db.drinkDao().getAll();
         for (Drink tempDrink : drinks){
             if (tempDrink.getName().contains(drinkName)){
@@ -45,6 +51,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
         btnAddToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                db.orderDao().insert(new Order(drinkID,ep.getUserEmail(),1));
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }

@@ -1,8 +1,8 @@
 package com.example.tlin7877.assignment_1.activity;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,105 +10,66 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ImageView;
 
-import com.example.tlin7877.assignment_1.DrinksAdapter;
+import com.example.tlin7877.assignment_1.DownloadTask;
 import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
 import com.example.tlin7877.assignment_1.database.AppDatabase;
-import com.example.tlin7877.assignment_1.entity.User;
 
-public class HomeActivity extends AppCompatActivity
+public class DownloadActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private AppDatabase db;
     private EmailPersister ep;
-    private DrinksAdapter adapter;
-    private ListView listView;
 
-    String [] drinkName = {
-            "Featured Dark Roast",
-            "Nitro Teavana Peach Tea",
-            "Salted Caramel Mocha Frappuccino"
-    };
-    Integer[] imgid ={
-            R.drawable.dark_roasted,
-            R.drawable.nitro_peach_tea,
-            R.drawable.salted_caramel_frap
-    };
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_download);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_download);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerLayout = navigationView.getHeaderView(0);
+        ep = new EmailPersister(this);
 
-        TextView tvUserName = (TextView) headerLayout.findViewById(R.id.txtUserEmail);
-
-        ep = new EmailPersister(HomeActivity.this);
-        String userEmail = ep.getUserEmail();
-        tvUserName.setText(userEmail);
-
-        tvUserName.setOnClickListener(new View.OnClickListener() {
+        final ImageView downloadImg = (ImageView) findViewById(R.id.imgDownloadImg);
+        Button btnDownloadImg = (Button) findViewById(R.id.btnDownLoadImg);
+        btnDownloadImg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class).addFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+            public void onClick(View view) {
+                final DownloadTask downloadTask = new DownloadTask(
+                        DownloadActivity.this,"Start downloading");
+                downloadTask.execute("https://i.pinimg.com/736x/be/07/5f/be075fe5323dc7c89e34236e5f56d701--logo-starbucks-starbucks-galaxy.jpg");
+                String imagePath = Environment.getExternalStorageDirectory().toString() +
+                        "/be075fe5323dc7c89e34236e5f56d701--logo-starbucks-starbucks-galaxy.jpg";
+                downloadImg.setImageDrawable(Drawable.createFromPath(imagePath));
             }
         });
-
-        //Generate ListView from SQLite Database
-        displayListView();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String selectedItem= drinkName[+position];
-                int picutreID = imgid[+position];
-                Intent intent = new Intent(HomeActivity.this, DrinkDetailActivity.class).addFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("Drink_Name",selectedItem);
-                intent.putExtra("Drink_Pic_ID",picutreID);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void displayListView() {
-        adapter = new DrinksAdapter(this, drinkName,imgid);
-
-        listView = (ListView) findViewById(R.id.listView_Drink);
-        listView.setAdapter(adapter);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_download);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

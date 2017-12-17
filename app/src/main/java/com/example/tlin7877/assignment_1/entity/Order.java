@@ -16,9 +16,6 @@ public class Order {
     @ColumnInfo(name = "OrderID")
     private int OrderID;
 
-    @ColumnInfo(name = "ReferenceNumber")
-    private String ReferenceNumber;
-
     @ForeignKey(entity = Drink.class, parentColumns = "DrinkID", childColumns ="DrinkID" )
     @ColumnInfo(name = "DrinkID")
     private int DrinkID;
@@ -27,27 +24,17 @@ public class Order {
     @ColumnInfo(name = "UserEmail")
     private String UserEmail;
 
-    @ColumnInfo(name = "Size")
-    private String Size;
-
-    @ColumnInfo(name = "Comment")
-    private String Comment;
-
-    @ColumnInfo(name = "Date")
-    private String Date;
+    @ColumnInfo(name = "Quantity")
+    private int Quantity;
 
     @Ignore
     public Order() {
     }
 
-    public Order(String ReferenceNumber,int DrinkID,
-                 String UserEmail,String Size,String Comment,String Date) {
-        this.ReferenceNumber=ReferenceNumber;
+    public Order(int DrinkID, String UserEmail,int Quantity) {
         this.DrinkID=DrinkID;
         this.UserEmail=UserEmail;
-        this.Size=Size;
-        this.Comment=Comment;
-        this.Date=Date;
+        this.Quantity = Quantity;
     }
 
     public int getOrderID() {
@@ -56,14 +43,6 @@ public class Order {
 
     public void setOrderID(int orderID) {
         OrderID = orderID;
-    }
-
-    public String getReferenceNumber() {
-        return ReferenceNumber;
-    }
-
-    public void setReferenceNumber(String referenceNumber) {
-        ReferenceNumber = referenceNumber;
     }
 
     public int getDrinkID() {
@@ -82,29 +61,11 @@ public class Order {
         UserEmail = userEmail;
     }
 
-    public String getSize() {
-        return Size;
+    public int getQuantity() {
+        return Quantity;
     }
 
-    public void setSize(String size) {
-        Size = size;
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
-
-    public String getComment() {
-        return Comment;
-    }
-
-    public void setComment(String comment) {
-        Comment = comment;
-    }
-
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
-
-
 }

@@ -1,36 +1,42 @@
 package com.example.tlin7877.assignment_1;
 
-
-import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.tlin7877.assignment_1.database.AppDatabase;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by tlin7877 on 12/7/2017.
  */
 
 public class EmailPersister {
-    private static EmailPersister instance = new EmailPersister();
-    private static String Email;
+    private String EMAIL = "Email";
+    //key for preferences
+    private String PREFERENCES="emailSession";
+    SharedPreferences sessionPrefer;
+    SharedPreferences.Editor editor;
 
-    public EmailPersister(){
-        this.Email = null;
+    public EmailPersister(Context context){
+        sessionPrefer = context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE);
+        editor = sessionPrefer.edit();
     }
 
-    public static EmailPersister getInstance(){
-        return instance;
+    public void storeUser(String email){
+        editor.putString(EMAIL,email);
+        editor.commit();
     }
 
-    public static void setInstance(EmailPersister instance){
-        EmailPersister.instance = instance;
+    //to get useremail
+    public String getUserEmail()
+    {
+        return sessionPrefer.getString(EMAIL,"");
     }
 
-    public void setEmail(String email){
-        this.Email = email;
-    }
-
-    public String getEmail(){
-        return this.Email;
+    public void logOutUser()
+    {
+        editor.clear();
+        editor.commit();
     }
 }
