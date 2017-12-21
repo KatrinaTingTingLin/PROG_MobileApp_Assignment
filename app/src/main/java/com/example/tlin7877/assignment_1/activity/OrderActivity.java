@@ -53,10 +53,10 @@ public class OrderActivity extends AppCompatActivity
         ep = new EmailPersister(this);
         db = AppDatabase.getAppDatabase(this);
 
-        List<String> orderDrinks = db.orderDao().getAllDrinks(ep.getUserEmail());
-        List<Integer> orderQuantity = db.orderDao().getAllQuantity(ep.getUserEmail());
-        drinkName = orderDrinks.toArray(new String[db.orderDao().countOrders()]);
-        quantity = orderQuantity.toArray(new Integer[db.orderDao().countOrders()]);
+        //List<String> orderDrinks = db.orderDao().getAllDrinks(ep.getUserEmail());
+        //List<Integer> orderQuantity = db.orderDao().getAllQuantity(ep.getUserEmail());
+        //drinkName = orderDrinks.toArray(new String[db.orderDao().countOrders()]);
+        //quantity = orderQuantity.toArray(new Integer[db.orderDao().countOrders()]);
 
         //Generate ListView from SQLite Database
         displayListView();
