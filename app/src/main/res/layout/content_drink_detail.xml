@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/backgroundDarkGrey"
+    tools:context="com.example.tlin7877.assignment_1.activity.DrinkDetailActivity">
 
-    <ImageView
-        android:id="@+id/drinkPic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/drinkPic"
-        android:padding="30dp">
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/drinkPic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"/>
         <TextView
             android:id="@+id/drinkName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top"
             android:textColor="@color/backgroundDarkGrey"
+            android:layout_gravity="center"
             android:textSize="30dp"
-
-            android:fontFamily="sans-serif-smallcaps"/>
-        <TextView
-            android:id="@+id/drinkDesc"
+            android:fontFamily="sans-serif-smallcaps"
+            android:padding="5dp"/>
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:textColor="@color/backgroundDarkGrey"
-            android:textSize="20dp"
-            android:fontFamily="sans-serif-smallcaps"/>
+            android:layout_gravity="center"
+            android:padding="5dp">
+            <TextView
+                android:id="@+id/drinkDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/backgroundDarkGrey"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif-smallcaps"/>
+        </ScrollView>
     </LinearLayout>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnAddToOrder"
+        android:theme="@style/buttonStyle"
+        android:background="@drawable/rounded_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="@string/action_addToOrder"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif"/>
+</android.support.design.widget.CoordinatorLayout>

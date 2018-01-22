@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundDarkGrey">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+        <ImageView
+            android:id="@+id/imgDownloadImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnDownLoadImg"
         android:theme="@style/buttonStyle"
@@ -12,14 +40,7 @@
         android:textSize="15dp"
         android:textColor="@color/white"
         android:fontFamily="sans-serif"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/regular_padding" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/regular_padding"/>
 
-    <ImageView
-        android:id="@+id/imgDownloadImg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnDownLoadImg"
-        android:adjustViewBounds="true"/>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1016409585465",
+    "firebase_url": "https://mobileassignment-tlin.firebaseio.com",
+    "project_id": "mobileassignment-tlin",
+    "storage_bucket": "mobileassignment-tlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016409585465:android:cc2fc7bd03588800",
+        "android_client_info": {
+          "package_name": "com.example.tlin7877.assignment_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016409585465-llbfmnbqh8vruaas12tfrj5jkilhlr8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ_9_GuvHD694l6oQu3ZJA0p5KXKK2mTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

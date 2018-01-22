@@ -1,6 +1,5 @@
-package com.example.tlin7877.assignment_1;
+package com.example.tlin7877.assignment_1.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tlin7877.assignment_1.R;
+
 import java.util.ArrayList;
 
 /**
@@ -16,13 +17,11 @@ import java.util.ArrayList;
  */
 
 public class DrinksAdapter extends ArrayAdapter<String> {
-    private final Activity context;
     private final String[] itemname;
     private final Integer[] imgid;
 
-    public DrinksAdapter(Activity context, String[] itemname, Integer[] imgid){
+    public DrinksAdapter(Context context, String[] itemname, Integer[] imgid){
         super(context, R.layout.content_list_layout,itemname);
-        this.context=context;
         this.itemname=itemname;
         this.imgid=imgid;
     }

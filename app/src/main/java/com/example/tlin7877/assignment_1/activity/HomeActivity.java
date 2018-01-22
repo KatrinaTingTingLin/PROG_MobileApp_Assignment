@@ -17,15 +17,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.tlin7877.assignment_1.DrinksAdapter;
+import com.example.tlin7877.assignment_1.adapter.DrinksAdapter;
 import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
 import com.example.tlin7877.assignment_1.database.AppDatabase;
-import com.example.tlin7877.assignment_1.entity.User;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private AppDatabase db;
     private EmailPersister ep;
     private DrinksAdapter adapter;
     private ListView listView;
@@ -47,6 +47,27 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ep = new EmailPersister(this);
+        db = AppDatabase.getAppDatabase(this);
+
+        setNavigator();
+
+        displayListView();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String selectedItem= drinkName[+position];
+                int picutreID = imgid[+position];
+                Intent intent = new Intent(HomeActivity.this, DrinkDetailActivity.class).addFlags(
+                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("Drink_Name",selectedItem);
+                intent.putExtra("Drink_Pic_ID",picutreID);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void setNavigator(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
@@ -63,7 +84,6 @@ public class HomeActivity extends AppCompatActivity
 
         TextView tvUserName = (TextView) headerLayout.findViewById(R.id.txtUserEmail);
 
-        ep = new EmailPersister(HomeActivity.this);
         String userEmail = ep.getUserEmail();
         tvUserName.setText(userEmail);
 
@@ -72,21 +92,6 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class).addFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-            }
-        });
-
-        //Generate ListView from SQLite Database
-        displayListView();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String selectedItem= drinkName[+position];
-                int picutreID = imgid[+position];
-                Intent intent = new Intent(HomeActivity.this, DrinkDetailActivity.class).addFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("Drink_Name",selectedItem);
-                intent.putExtra("Drink_Pic_ID",picutreID);
                 startActivity(intent);
             }
         });
@@ -132,8 +137,6 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(this, OrderActivity.class).addFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
-        } else if (id == R.id.nav_history) {
-
         } else if (id == R.id.nav_logout) {
             ep.logOutUser();
             Intent intent = new Intent(this, MainActivity.class).addFlags(

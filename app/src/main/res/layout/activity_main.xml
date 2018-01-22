@@ -8,39 +8,43 @@
     android:background="@color/backgroundDarkGrey"
     tools:context="com.example.tlin7877.assignment_1.activity.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_main"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
-
-    <ImageView
-        android:id="@+id/fullscreen_content"
-        android:src="@drawable/image01"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:padding="@dimen/regular_padding"/>
-    <TextView
-        android:id="@+id/txtMainPageWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="sans-serif"
-        android:padding="@dimen/regular_padding"
-        android:text="@string/longtext_welcome"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        app:layout_toBottomOf="@+id/fullscreen_content" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+        <ImageView
+            android:id="@+id/fullscreen_content"
+            android:src="@drawable/image01"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/regular_padding"/>
+        <TextView
+            android:id="@+id/txtMainPageWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:padding="@dimen/regular_padding"
+            android:text="@string/longtext_welcome"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_toBottomOf="@+id/fullscreen_content" />
+    </LinearLayout>
     <Button
         android:id="@+id/btnSignIn"
         android:theme="@style/buttonStyle"
@@ -63,8 +67,8 @@
         android:textSize="15dp"
         android:textColor="@color/white"
         android:fontFamily="sans-serif"
-        app:layout_constraintTop_toBottomOf="@+id/txtMainPageWelcome"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/regular_padding"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

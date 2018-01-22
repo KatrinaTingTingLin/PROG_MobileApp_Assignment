@@ -4,7 +4,7 @@
     <!-- AppLoadActivity -->
 
     <!-- MainActivity -->
-    <string name="longtext_welcome">Order ahead, pay with your phone, earn Stars and Rewards.</string>
+    <string name="longtext_welcome">This app is for learning purpose.</string>
     <string name="action_join_rewards">Join Rewards</string>
     <string name="action_sign_in">Sign in</string>
 
@@ -122,6 +122,7 @@
     <string name="label_province">Province:</string>
     <string name="label_postal_code">Postal code:</string>
     <string name="label_birthday">Birthday:</string>
+    <string name="action_get_token">Get Token</string>
     <string name="action_view_map">Open map</string>
     <string name="action_view_website">Open starbucks website</string>
 

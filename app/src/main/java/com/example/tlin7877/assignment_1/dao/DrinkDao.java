@@ -23,6 +23,9 @@ public interface DrinkDao {
     @Query("SELECT * FROM Drink WHERE DrinkID LIKE :drinkID LIMIT 1")
     Drink findByDrinkID(int drinkID);
 
+    @Query("SELECT Name from Drink WHERE DrinkID LIKE :drinkID LIMIT 1")
+    String getDrinkName(int drinkID);
+
     @Query("SELECT COUNT(*) from Drink")
     int countDrinks();
 

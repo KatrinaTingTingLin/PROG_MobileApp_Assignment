@@ -20,6 +20,12 @@ public interface OrderDao {
     @Query("SELECT * FROM Order_T")
     List<Order> getAll();
 
+    @Query("SELECT DrinkID FROM Order_T WHERE UserEmail LIKE :userEmail")
+    List<Integer> getAllDrinkIDs(String userEmail);
+
+    @Query("SELECT Quantity FROM Order_T WHERE UserEmail LIKE :userEmail")
+    List<Integer> getAllQuantitys(String userEmail);
+
     @Query("SELECT * FROM Order_T WHERE OrderID LIKE :orderID LIMIT 1")
     Order findByOrderID(int orderID);
 

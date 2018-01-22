@@ -11,16 +11,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tlin7877.assignment_1.DownloadTask;
 import com.example.tlin7877.assignment_1.EmailPersister;
 import com.example.tlin7877.assignment_1.R;
 import com.example.tlin7877.assignment_1.database.AppDatabase;
 import com.example.tlin7877.assignment_1.entity.User;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -34,18 +37,10 @@ public class ProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
-        setSupportActionBar(toolbar);
+        ep = new EmailPersister(this);
+        db = AppDatabase.getAppDatabase(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_profile);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
-        navigationView.setNavigationItemSelectedListener(this);
+        setNavigator();
 
         TextView tvFirstName = (TextView) findViewById(R.id.txt_first_name_profile);
         TextView tvLastName = (TextView) findViewById(R.id.txt_last_name_profile);
@@ -55,8 +50,6 @@ public class ProfileActivity extends AppCompatActivity
         TextView tvPostalCode = (TextView) findViewById(R.id.txt_postal_code_profile);
         TextView tvBirthday = (TextView) findViewById(R.id.txt_birthday_profile);
 
-        ep = new EmailPersister(this);
-        db = AppDatabase.getAppDatabase(this);
         User user = db.userDao().findByEmail(ep.getUserEmail());
         tvFirstName.setText(user.getFirstName());
         tvLastName.setText(user.getLastName());
@@ -65,6 +58,18 @@ public class ProfileActivity extends AppCompatActivity
         tvProvince.setText(user.getProvince());
         tvPostalCode.setText(user.getPostalCode());
         tvBirthday.setText(user.getBirthday());
+
+        Button btnGetToken = (Button) findViewById(R.id.btnGetToken);
+        btnGetToken.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = FirebaseInstanceId.getInstance().getToken();
+                Toast.makeText(ProfileActivity.this, "Current token ["+token+"]",
+                        Toast.LENGTH_LONG).show();
+                Log.d("App", "Token ["+token+"]");
+
+            }
+        });
 
         Button btnViewMap = (Button) findViewById(R.id.btnViewMap);
         btnViewMap.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +93,38 @@ public class ProfileActivity extends AppCompatActivity
             }
         });
     }
+
+
+    public void setNavigator(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_profile);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_home);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+
+        TextView tvUserName = (TextView) headerLayout.findViewById(R.id.txtUserEmail);
+
+        String userEmail = ep.getUserEmail();
+        tvUserName.setText(userEmail);
+
+        tvUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class).addFlags(
+                        Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -121,8 +158,6 @@ public class ProfileActivity extends AppCompatActivity
             Intent intent = new Intent(this, OrderActivity.class).addFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
-        } else if (id == R.id.nav_history) {
-
         } else if (id == R.id.nav_logout) {
             ep.logOutUser();
             Intent intent = new Intent(this, MainActivity.class).addFlags(
@@ -130,7 +165,7 @@ public class ProfileActivity extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_home);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_profile);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -24,18 +24,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-
     private AppDatabase db;
+    User user;
     // UI references.
     private EditText mEmail;
     private EditText mPassword;
@@ -60,17 +50,23 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = db.userDao().findByEmail(mEmail.getText().toString());
-                if (mPassword.getText().toString().equals(user.getPassword())){
-                    final EmailPersister ep =  new EmailPersister(LoginActivity.this);
-                    ep.storeUser(user.getEmail());
-                    Toast.makeText(LoginActivity.this,"Hello", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                try{
+                    user = db.userDao().findByEmail(mEmail.getText().toString());
+                    if (mPassword.getText().toString().equals(user.getPassword())){
+                        final EmailPersister ep =  new EmailPersister(LoginActivity.this);
+                        ep.storeUser(user.getEmail());
+                        Toast.makeText(LoginActivity.this,"Hello", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,"Username and password is NOT correct", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else{
-                    Toast.makeText(LoginActivity.this,"Username and password is NOT correct", Toast.LENGTH_SHORT).show();
+                catch(Exception e){
+                    Toast.makeText(LoginActivity.this,"Account doesn't exist", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }

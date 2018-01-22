@@ -7,40 +7,61 @@
     android:layout_height="match_parent"
     tools:context="com.example.tlin7877.assignment_1.activity.ProfileActivity">
 
-    <Button
-        android:id="@+id/btnViewMap"
-        android:theme="@style/buttonStyle"
-        android:background="@drawable/rounded_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_view_map"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:fontFamily="sans-serif"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/regular_padding" />
-    <Button
-        android:id="@+id/btnViewWeb"
-        android:theme="@style/buttonStyle"
-        android:background="@drawable/rounded_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_view_website"
-        android:textSize="15dp"
-        android:textColor="@color/white"
-        android:fontFamily="sans-serif"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/regular_padding"
-        android:layout_below="@+id/btnViewMap"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_below="@+id/btnViewWeb">
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <Button
+            android:id="@+id/btnGetToken"
+            android:theme="@style/buttonStyle"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_get_token"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_margin="@dimen/regular_padding" />
+        <Button
+            android:id="@+id/btnViewMap"
+            android:theme="@style/buttonStyle"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_view_map"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_margin="@dimen/regular_padding" />
+        <Button
+            android:id="@+id/btnViewWeb"
+            android:theme="@style/buttonStyle"
+            android:background="@drawable/rounded_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_view_website"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:layout_margin="@dimen/regular_padding"
+            android:layout_below="@+id/btnViewMap"/>
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_below="@+id/btnViewWeb">
             <TableRow android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
                 <TextView
@@ -155,6 +176,9 @@
             </TableRow>
         </TableLayout>
     </LinearLayout>
+
+
+
 
 
 </RelativeLayout>
